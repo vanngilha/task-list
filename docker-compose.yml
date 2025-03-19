@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  mysql:
+    image: mariadb:10.8.3
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel-task 
+    ports:
+      - "3306:3306"
+    networks:
+      - laravel_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - laravel_network
+
+networks:
+  laravel_network:
+    driver: bridge
